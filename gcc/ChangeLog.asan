@@ -7,6 +7,14 @@
 
 2012-11-18  H.J. Lu  <hongjiu.lu@intel.com>
 
+	* Makefile.in (CFLAGS): Add -faddress-sanitizer if CFLAGS contains
+	-DBOOTSTRAP_GCC_WITH_ASAN.
+	(CXXFLAGS): Likewise.
+	(LDFLAGS): Add -faddress-sanitizer -static-libasan if CFLAGS
+	contains -DBOOTSTRAP_GCC_WITH_ASAN.
+
+2012-11-18  H.J. Lu  <hongjiu.lu@intel.com>
+
 	PR driver/55379
 	PR driver/55374
 	* gcc.c (prepend_lang_specific_driver): New function.

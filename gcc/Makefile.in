@@ -137,6 +137,14 @@ CFLAGS = @CFLAGS@
 CXXFLAGS = @CXXFLAGS@
 LDFLAGS = @LDFLAGS@
 
+# We only want to apply -faddress-sanitizer to the gcc directory.  We
+# use -DBOOTSTRAP_GCC_WITH_ASAN as key to turn on -faddress-sanitizer.
+ifneq (,$(filter -DBOOTSTRAP_GCC_WITH_ASAN,$(CFLAGS)))
+override CFLAGS += -faddress-sanitizer
+override CXXFLAGS += -faddress-sanitizer
+override LDFLAGS += -faddress-sanitizer -static-libasan
+endif
+
 # Flags to determine code coverage. When coverage is disabled, this will
 # contain the optimization flags, as you normally want code coverage
 # without optimization.
