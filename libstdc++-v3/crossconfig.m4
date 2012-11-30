@@ -59,7 +59,7 @@ case "${host}" in
 
   *-freebsd*)
     SECTION_FLAGS='-ffunction-sections -fdata-sections'
-    AC_SUBST(SECTION_FLAGS) 
+    AC_SUBST(SECTION_FLAGS)
     GLIBCXX_CHECK_LINKER_FEATURES
     AC_DEFINE(HAVE_SETENV)
     AC_DEFINE(HAVE_FINITEF)
@@ -133,12 +133,12 @@ case "${host}" in
     GCC_CHECK_TLS
     case "$target" in
       *-hpux10*)
-	AC_DEFINE(HAVE_ISINF)
-	AC_DEFINE(HAVE_ISINFF)
-	AC_DEFINE(HAVE_ISNANF)
-	AC_DEFINE(HAVE_FINITE)
-	AC_DEFINE(HAVE_FINITEF)
-	;;
+        AC_DEFINE(HAVE_ISINF)
+        AC_DEFINE(HAVE_ISINFF)
+        AC_DEFINE(HAVE_ISNANF)
+        AC_DEFINE(HAVE_FINITE)
+        AC_DEFINE(HAVE_FINITEF)
+        ;;
     esac
     ;;
   *-linux* | *-uclinux* | *-gnu* | *-kfreebsd*-gnu | *-knetbsd*-gnu)
@@ -157,7 +157,7 @@ case "${host}" in
     ;;
   *-netbsd*)
     SECTION_FLAGS='-ffunction-sections -fdata-sections'
-    AC_SUBST(SECTION_FLAGS) 
+    AC_SUBST(SECTION_FLAGS)
     GLIBCXX_CHECK_LINKER_FEATURES
     AC_DEFINE(HAVE_FINITEF)
     AC_DEFINE(HAVE_FINITE)
@@ -175,7 +175,7 @@ case "${host}" in
     ;;
   *-qnx6.1* | *-qnx6.2*)
     SECTION_FLAGS='-ffunction-sections -fdata-sections'
-    AC_SUBST(SECTION_FLAGS) 
+    AC_SUBST(SECTION_FLAGS)
     GLIBCXX_CHECK_LINKER_FEATURES
     AC_DEFINE(HAVE_COSF)
     AC_DEFINE(HAVE_COSL)
@@ -204,8 +204,8 @@ case "${host}" in
          AC_DEFINE(HAVE_FINITE)
          AC_DEFINE(HAVE_FPCLASS)
          # All of the dependencies for wide character support are here, so
-         # turn it on. 
-         AC_DEFINE(_GLIBCXX_USE_WCHAR_T) 
+         # turn it on.
+         AC_DEFINE(_GLIBCXX_USE_WCHAR_T)
         ;;
     esac
     case "$target" in
@@ -240,6 +240,13 @@ case "${host}" in
       AC_DEFINE(HAVE_ISINFL)
       AC_DEFINE(HAVE_ISNANL)
     fi
+    ;;
+  *-ebbrt*)
+    AC_CHECK_HEADERS([sys/types.h locale.h float.h])
+    GLIBCXX_CHECK_BUILTIN_MATH_SUPPORT
+    GLIBCXX_CHECK_COMPLEX_MATH_SUPPORT
+    GLIBCXX_CHECK_STDLIB_SUPPORT
+    GLIBCXX_CHECK_LINKER_FEATURES
     ;;
   *-vxworks)
     AC_DEFINE(HAVE_ACOSF)

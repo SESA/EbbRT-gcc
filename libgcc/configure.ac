@@ -52,10 +52,10 @@ AC_ARG_ENABLE(shared,
   yes | no) ;;
   *)
     enable_shared=no
-    IFS="${IFS= 	}"; ac_save_ifs="$IFS"; IFS="${IFS}:,"
+    IFS="${IFS=         }"; ac_save_ifs="$IFS"; IFS="${IFS}:,"
     for pkg in $enableval; do
       if test "X$pkg" = "Xgcc" || test "X$pkg" = "Xlibgcc"; then
-	enable_shared=yes
+        enable_shared=yes
       fi
     done
     IFS="$ac_save_ifs"
@@ -170,8 +170,8 @@ AC_SUBST(long_double_type_size)
 
 # Check for decimal float support.
 AC_CACHE_CHECK([whether decimal floating point is supported], [libgcc_cv_dfp],
-	       [AC_COMPILE_IFELSE([_Decimal32 x;], [libgcc_cv_dfp=yes],
-				  [libgcc_cv_dfp=no])])
+               [AC_COMPILE_IFELSE([_Decimal32 x;], [libgcc_cv_dfp=yes],
+                                  [libgcc_cv_dfp=no])])
 decimal_float=$libgcc_cv_dfp
 AC_SUBST(decimal_float)
 
@@ -179,8 +179,8 @@ GCC_AC_ENABLE_DECIMAL_FLOAT([$host])
 
 # Check for fixed-point support.
 AC_CACHE_CHECK([whether fixed-point is supported], [libgcc_cv_fixed_point],
-	       [AC_COMPILE_IFELSE([_Sat _Fract x;], [libgcc_cv_fixed_point=yes],
-				  [libgcc_cv_fixed_point=no])])
+               [AC_COMPILE_IFELSE([_Sat _Fract x;], [libgcc_cv_fixed_point=yes],
+                                  [libgcc_cv_fixed_point=no])])
 fixed_point=$libgcc_cv_fixed_point
 AC_SUBST(fixed_point)
 
@@ -195,7 +195,7 @@ GCC_CHECK_UNWIND_GETIPINFO
 # FIXME: This should be centralized in config/sjlj.m4.
 AC_ARG_ENABLE(sjlj-exceptions,
   AC_HELP_STRING([--enable-sjlj-exceptions],
-		 [force use of builtin_setjmp for exceptions]),
+                 [force use of builtin_setjmp for exceptions]),
   [case "$enableval" in
    yes|no|auto) ;;
    *) AC_MSG_ERROR([unknown argument to --enable-sjlj-exceptions]) ;;
@@ -234,7 +234,7 @@ fi
 case $enable_sjlj_exceptions in
 yes)
   AC_DEFINE(LIBGCC_SJLJ_EXCEPTIONS, 1,
-	[Define if the C compiler is configured for setjmp/longjmp exceptions.])
+        [Define if the C compiler is configured for setjmp/longjmp exceptions.])
   ;;
 no)
   ;;
@@ -247,16 +247,16 @@ AC_LIB_PROG_LD_GNU
 
 AC_MSG_CHECKING([for thread model used by GCC])
 target_thread_file=`$CC -v 2>&1 | sed -n 's/^Thread model: //p'`
-AC_MSG_RESULT([$target_thread_file]) 
+AC_MSG_RESULT([$target_thread_file])
 
 # Check for assembler CFI support.
 AC_CACHE_CHECK([whether assembler supports CFI directives], [libgcc_cv_cfi],
-	       [AC_COMPILE_IFELSE(
+               [AC_COMPILE_IFELSE(
 [asm("\n\
-	.text\n\
-	.cfi_startproc\n\
-	.cfi_personality 0, symbol\n\
-	.cfi_endproc");],
+        .text\n\
+        .cfi_startproc\n\
+        .cfi_personality 0, symbol\n\
+        .cfi_endproc");],
   [libgcc_cv_cfi=yes],
   [libgcc_cv_cfi=no])])
 
@@ -281,10 +281,10 @@ rm -f conftest.c
 case ${host} in
 i?86-*-solaris2* | x86_64-*-solaris2.1[[0-9]]*)
   cat > conftest.s <<EOF
-	.section	.eh_frame,"a",@unwind
-	.zero	4
-	.section	.jcr,"aw",@progbits
-	.zero	8
+        .section	.eh_frame,"a",@unwind
+        .zero	4
+        .section	.jcr,"aw",@progbits
+        .zero	8
 EOF
   if AC_TRY_COMMAND(${CC-cc} -shared -nostartfiles -nodefaultlibs -o conftest.so conftest.s 1>&AS_MESSAGE_LOG_FD); then
       tmake_file="${tmake_file} i386/t-crtstuff"
@@ -296,14 +296,14 @@ esac
 # we can check for asm_hidden_op.
 AC_CACHE_CHECK([for __attribute__((visibility("hidden")))],
     libgcc_cv_hidden_visibility_attribute, [
-	echo 'int __attribute__ ((visibility ("hidden"))) foo (void) { return 1; }' > conftest.c
-	libgcc_cv_hidden_visibility_attribute=no
-	if AC_TRY_COMMAND(${CC-cc} -Werror -S conftest.c -o conftest.s 1>&AS_MESSAGE_LOG_FD); then
-	    if grep "\\$asm_hidden_op.*foo" conftest.s >/dev/null; then
-		libgcc_cv_hidden_visibility_attribute=yes
-	    fi
-	fi
-	rm -f conftest.*
+        echo 'int __attribute__ ((visibility ("hidden"))) foo (void) { return 1; }' > conftest.c
+        libgcc_cv_hidden_visibility_attribute=no
+        if AC_TRY_COMMAND(${CC-cc} -Werror -S conftest.c -o conftest.s 1>&AS_MESSAGE_LOG_FD); then
+            if grep "\\$asm_hidden_op.*foo" conftest.s >/dev/null; then
+                libgcc_cv_hidden_visibility_attribute=yes
+            fi
+        fi
+        rm -f conftest.*
     ])
 
 if test $libgcc_cv_hidden_visibility_attribute = yes; then
@@ -334,12 +334,12 @@ AC_SUBST(set_use_emutls)
 
 # Conditionalize the sfp-machine.h header for this target machine.
 if test -z "${sfp_machine_header}"; then
-	sfp_machine_header=$cpu_type/sfp-machine.h
-	if test -f ${srcdir}/config/${sfp_machine_header}; then
-		:
-	else
-		sfp_machine_header=no-sfp-machine.h
-	fi
+        sfp_machine_header=$cpu_type/sfp-machine.h
+        if test -f ${srcdir}/config/${sfp_machine_header}; then
+                :
+        else
+                sfp_machine_header=no-sfp-machine.h
+        fi
 fi
 AC_SUBST(sfp_machine_header)
 
@@ -347,10 +347,10 @@ AC_SUBST(sfp_machine_header)
 tmake_file_=
 for f in ${tmake_file}
 do
-	if test -f ${srcdir}/config/$f
-	then
-		tmake_file_="${tmake_file_} \$(srcdir)/config/$f"
-	fi
+        if test -f ${srcdir}/config/$f
+        then
+                tmake_file_="${tmake_file_} \$(srcdir)/config/$f"
+        fi
 done
 tmake_file="${tmake_file_}"
 AC_SUBST(tmake_file)
@@ -359,7 +359,7 @@ AC_SUBST(tmake_file)
 tm_file_=
 for f in ${tm_file}
 do
-	tm_file_="${tm_file_} \$(srcdir)/config/$f"
+        tm_file_="${tm_file_} \$(srcdir)/config/$f"
 done
 tm_file="${tm_file_}"
 AC_SUBST(tm_file)
@@ -369,6 +369,7 @@ AC_SUBST(tm_defines)
 case $target_thread_file in
     aix)	thread_header=config/rs6000/gthr-aix.h ;;
     dce)	thread_header=config/pa/gthr-dce.h ;;
+    ebbrt)      thread_header=config/gthr-ebbrt.h ;;
     lynx)	thread_header=config/gthr-lynx.h ;;
     mipssde)	thread_header=config/mips/gthr-mipssde.h ;;
     posix)	thread_header=gthr-posix.h ;;

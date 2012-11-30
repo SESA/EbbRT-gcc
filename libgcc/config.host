@@ -1112,6 +1112,9 @@ vax-*-netbsdelf*)
 	;;
 vax-*-openbsd*)
 	;;
+x86_64-*-ebbos*)
+        extra_parts="crtbegin.o crtend.o"
+        ;;
 xstormy16-*-elf)
 	tmake_file="stormy16/t-stormy16 t-fdpbit"
 	;;
