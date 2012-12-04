@@ -1112,7 +1112,7 @@ vax-*-netbsdelf*)
 	;;
 vax-*-openbsd*)
 	;;
-x86_64-*-ebbos*)
+x86_64-*-ebbrt*)
         extra_parts="crtbegin.o crtend.o"
         ;;
 xstormy16-*-elf)
