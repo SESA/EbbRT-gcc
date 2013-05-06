@@ -842,6 +842,9 @@ powerpc-*-darwin*)
 	tmake_file="$tmake_file rs6000/t-ibm-ldouble"
 	extra_parts="$extra_parts crt2.o"
 	;;
+powerpc64-*-ebbrt*)
+        extra_parts="$extra_parts crtbegin.o crtend.o"
+        ;;
 powerpc64-*-darwin*)
 	tmake_file="$tmake_file rs6000/t-darwin64 rs6000/t-ibm-ldouble"
 	extra_parts="$extra_parts crt2.o"

@@ -754,7 +754,7 @@ case ${target} in
     *) echo 'Unknown thread configuration for VxWorks'; exit 1 ;;
   esac
   ;;
-*-*-ebbos*)
+*-*-ebbrt*)
   extra_parts="crtbegin.o crtend.o"
   gas=yes
   gnu_ld=yes
@@ -2032,6 +2032,11 @@ powerpc-*-rtems*)
 	extra_options="${extra_options} rs6000/sysv4.opt"
 	tmake_file="rs6000/t-fprules rs6000/t-rtems t-rtems rs6000/t-ppccomm"
 	;;
+powerpc64-*-ebbrt*)
+        tm_file="${tm_file} dbxelf.h elfos.h freebsd-spec.h rs6000/sysv4.h rs6000/default64.h rs6000/ebbrt.h newlib-stdint.h"
+        extra_options="${extra_options} rs6000/sysv4.opt"
+        tmake_file="rs6000/t-fprules rs6000/t-ppcos ${tmake_file} rs6000/t-ppccomm"
+        ;;
 powerpc-*-linux* | powerpc64-*-linux*)
 	tm_file="${tm_file} dbxelf.h elfos.h freebsd-spec.h rs6000/sysv4.h"
 	extra_options="${extra_options} rs6000/sysv4.opt"
